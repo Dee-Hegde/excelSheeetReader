@@ -3,16 +3,14 @@ import React from 'react'
 
 export const Data = ({excelData}) => {
 
-    return excelData.map((individualExcelData)=>(
-        <tr key={individualExcelData.Id}>
-            <th>{individualExcelData.name}</th>
-            <th>{individualExcelData.batch}</th>
-            <th>{individualExcelData.stock}</th>
-            <th>{individualExcelData.deal}</th>
-            <th>{individualExcelData.free}</th>
-            <th>{individualExcelData.mrp}</th>
-            <th>{individualExcelData.rate}</th>
-            <th>{moment(individualExcelData.exp).format("DD/MM/YYYY")}</th>
+    return excelData.map((individualExcelData,i)=>(
+        <tr key={i}>
+            {Object.keys(individualExcelData).map((key)=>{
+                if(individualExcelData[key] instanceof Date){
+                    return ( <th>{moment(individualExcelData[key]).format("DD/MM/YYYY")}</th>)}
+           return ( <th>{individualExcelData[key]}</th>)}
+            )}
+           
         </tr>        
     ))
 }
